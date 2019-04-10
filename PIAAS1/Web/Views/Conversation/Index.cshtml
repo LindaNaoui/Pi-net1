@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_ChatLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-6 col-md-8 col-sm-12">
+                <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Chat Box</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>
+                    <li class="breadcrumb-item">Chatroom</li>
+                    <li class="breadcrumb-item active">Chat </li>
+                </ul>
+            </div>
+            <div class="col-lg-6 col-md-4 col-sm-12 text-right">
+                <div class="bh_chart hidden-xs">
+                    <div class="float-left m-r-15">
+                        <small>Visitors</small>
+                        <h6 class="mb-0 mt-1"><i class="icon-user"></i> 1,784</h6>
+                    </div>
+                    <span class="bh_visitors float-right">2,5,1,8,3,6,7,5</span>
+                </div>
+                <div class="bh_chart hidden-sm">
+                    <div class="float-left m-r-15">
+                        <small>Visits</small>
+                        <h6 class="mb-0 mt-1"><i class="icon-globe"></i> 325</h6>
+                    </div>
+                    <span class="bh_visits float-right">10,8,9,3,5,8,5</span>
+                </div>
+                <div class="bh_chart hidden-sm">
+                    <div class="float-left m-r-15">
+                        <small>Chats</small>
+                        <h6 class="mb-0 mt-1"><i class="icon-bubbles"></i> 13</h6>
+                    </div>
+                    <span class="bh_chats float-right">1,8,5,6,2,4,3,2</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Start of ChatBot (www.chatbot.com) code -->
+    <script type="text/javascript">
+        window.__be = window.__be || {};
+        window.__be.id = "5bfb2d1e3fd03310106f9cb4";
+        (function () {
+            var be = document.createElement('script'); be.type = 'text/javascript'; be.async = true;
+            be.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.chatbot.com/widget/plugin.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(be, s);
+        })();
+    </script>
+    <!-- End of ChatBot code -->
+
+    <script src="tts.js"></script>
+    <script src="stt.js"></script>
+
+    <div>
+        <label style="color: darkorange; font-style: normal;font-size: medium" id="label1">Write Your Message Here!</label><br />
+        <textarea class="form-control" rows="4" cols="40" id="message" placeholder="Share what's in your mind..."></textarea>
+        <br />
+        <input type="button" class="btn btn-primary" id="sendmessage" value="Send" />
+        <input type="button" class="btn btn-primary" id="sendmessageVoice" value="Record" />
+        <br />
+        <br />
+        <div class="container chatArea">
+            <input type="hidden" id="displayname" />
+            <ul id="discussion"></ul>
+        </div>
+    </div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+    <script>
+        if (annyang) {
+            var commands = {
+                'map': function () { $("#sendmessageVoice").click() }
+            };
+            annyang.addCallback('result', function (userSaid, commandText, phrases) {
+                console.log(userSaid); // sample output: 'hello'
+                console.log(commandText); // sample output: 'hello (there)'
+                console.log(phrases); // sample output: ['hello', 'halo', 'yellow', 'polo', 'hello kitty']
+                if (userSaid[0] != " send") {
+                    console.log(userSaid[0]);
+                    console.log(userSaid[0] !== 'okay');
+                    document.getElementById('discussion').value = userSaid[0];
+
+                }
+            });
+            annyang.addCommands(commands);
+            annyang.start();
+        }
+    </script>
+
+    @section scripts {
+        <script src="~/Scripts/jquery.signalR-2.4.0.min.js"></script>
+        <script src="~/signalr/hubs"></script>
+        <!--<script src="~/Scripts/tts.js"></script>
+          <script src="~/Scripts/stt.js"></script>-->
+        <script>
+            $(function () {
+                var chat = $.connection.chatHub;
+                chat.client.addNewMessageToPage = function (name, message) {
+                    $('#discussion').append('<ul style="list-style-type:square"><li><strong style="color:red;font-style:normal;font-size:medium;text-transform:uppercase">' + htmlEncode(name) + '  ' + '<strong style="color:black;font-style:normal;font-size:medium;text-transform:lowercase">said</strong>'
+                        + '</strong>: ' + '<strong style="color:blue;font-style:oblique;font-size:medium">' + htmlEncode(message) + '</strong>' + '</li></ul>');
+                };
+                $('#displayname').val(prompt('Your Full Name Please:', ''));
+                $('#message').focus();
+                $.connection.hub.start().done(function () {
+                    $('#sendmessage').click(function () {
+                        chat.server.send($('#displayname').val(), $('#message').val());
+                        $('#message').val('').focus();
+                    });
+                });
+            });
+            function htmlEncode(value) {
+                var encodedValue = $('<div />').text(value).html();
+                return encodedValue;
+            }
+        </script>
+
+    }

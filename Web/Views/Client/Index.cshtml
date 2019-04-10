@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Web.Models.ClientViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+
+}
+
+<h2>Index</h2>
+@using (Html.BeginForm())
+{<table>
+        <tr>
+            <td>
+                <div>
+                    recherche selon le Nom des clients: @Html.TextBox("recherche")
+                </div>
+            </td>
+            <td> <input type="submit" value="Search" id="submit" /> </td>
+        </tr>
+    </table>}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ClientID)
+        </th>
+
+
+
+        <th>
+            Nom
+        </th>
+
+
+
+        <th>
+            Prenom
+        </th>
+
+
+        <th>
+            Actions
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClientID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomComplet.nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomComplet.prenom)
+            </td>
+            <td>
+                <a href="@Url.Action("Details","Client", new { id = item.ClientID})" class="btn btn-sm btn-outline-primary"><i class="icon-eye"></i></a>
+                <a href="@Url.Action("Edit","Client", new { id = item.ClientID})" class="btn btn-sm btn-outline-success"><i class="icon-pencil"></i></a>
+                <a href="@Url.Action("Delete","Client", new { id = item.ClientID})" class="btn btn-sm btn-outline-danger js-sweetalert" title="Delete" data-type="confirm"><i class="icon-trash"></i></a>
+            </td>
+        </tr>
+    }
+
+</table>

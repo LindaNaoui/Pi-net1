@@ -1,0 +1,92 @@
+﻿@using Web.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Connexion";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from www.wrraptheme.com/templates/lucid/hr/html/light/page-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 07 Mar 2019 23:04:02 GMT -->
+<head>
+    <title>:: Lucid HR :: Login</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="description" content="Lucid Bootstrap 4.1.1 Admin Template">
+    <meta name="author" content="WrapTheme, design by: ThemeMakker.com">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- VENDOR CSS -->
+    @Styles.Render("~/Content/assets/vendor/bootstrap/css/bootstrap.min.css")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- MAIN CSS -->
+    @Styles.Render("~/Content/light/assets/css/main.css")
+    @Styles.Render("~/Content/light/assets/css/color_skins.css")
+
+</head>
+<body class="theme-orange">
+    <!-- WRAPPER -->
+    <div id="wrapper">
+        <div class="vertical-align-wrap">
+            <div class="vertical-align-middle auth-main">
+                <div class="auth-box">
+                    <div class="top">
+                        <img src="http://www.wrraptheme.com/templates/lucid/hr/html/assets/images/logo-white.svg" alt="Lucid">
+                    </div>
+                    <div class="card">
+                        <div class="header">
+                            <p class="lead">Login to your account</p>
+                        </div>
+                        <div class="body">
+                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-auth-small", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary("", new { @class = "text-danger" })
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Email, new { @class = "control-label sr-only" })
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Password, new { @class = "control-label sr-only" })
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                                </div>
+
+                                <div class="form-group clearfix">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <div class="checkbox">
+                                            @Html.CheckBoxFor(m => m.RememberMe)
+                                            <span>Remember me</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*<div class="form-group clearfix">
+                                        <label class="fancy-checkbox element-left">
+                                            <input type="checkbox">
+                                            <span>Remember me</span>
+                                        </label>
+                                    </div>*@
+
+
+
+
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button>
+
+                                <div class="bottom">
+                                    <span class="helper-text m-b-10"><i class="fa fa-lock"></i>  @Html.ActionLink("Forget Password ?", "ForgotPassword")</span>
+                                    <span>Don't have an account? @Html.ActionLink("Register", "Register")</span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END WRAPPER -->
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Domain.Entities.Document>
+
+@{
+    /**/
+
+    Layout = "~/Views/Shared/_TeamleaderLayout.cshtml";
+}
+
+
+
+@using (Html.BeginForm())
+{
+
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-6 col-md-8 col-sm-12">
+                    <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Projects List</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>
+                        <li class="breadcrumb-item">Projects</li>
+                        <li class="breadcrumb-item active">Projects List</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="row clearfix">
+
+        @foreach (var item in Model)
+        {
+
+
+            <div class="col-lg-3 col-md-4 col-sm-12">
+
+                <div class="card">
+                    <div class="file">
+                        <a href="javascript:void(0);">
+                            <div class="hover">
+
+                            </div>
+
+                            <div class="image">
+
+                                <img src="@Url.Content(item.Path)" alt="Image" class="img-fluid" style="height:50px;width:100px;" />
+                            </div>
+                            <div class="file-name">
+                                <p class="m-b-5 text-muted">@Html.DisplayFor(modelItem => item.DocumentName)</p>
+                                <small>@Html.DisplayFor(modelItem => item.Size) <span class="date text-muted">@Html.DisplayFor(modelItem => item.DateCreation)</span></small>
+                            </div>
+
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+

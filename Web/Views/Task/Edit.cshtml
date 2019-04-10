@@ -1,0 +1,176 @@
+﻿@model Web.Models.TaskViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<div class="container-fluid">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-6 col-md-8 col-sm-12">
+                <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Create New Project</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>
+                    <li class="breadcrumb-item">Task</li>
+                    <li class="breadcrumb-item active">Add Task</li>
+                </ul>
+            </div>
+            <div class="col-lg-6 col-md-4 col-sm-12 text-right">
+                <div class="bh_chart hidden-xs">
+                    <div class="float-left m-r-15">
+                        <small>Visitors</small>
+                        <h6 class="mb-0 mt-1"><i class="icon-user"></i> 1,784</h6>
+                    </div>
+                    <span class="bh_visitors float-right">2,5,1,8,3,6,7,5</span>
+                </div>
+                <div class="bh_chart hidden-sm">
+                    <div class="float-left m-r-15">
+                        <small>Visits</small>
+                        <h6 class="mb-0 mt-1"><i class="icon-globe"></i> 325</h6>
+                    </div>
+                    <span class="bh_visits float-right">10,8,9,3,5,8,5</span>
+                </div>
+                <div class="bh_chart hidden-sm">
+                    <div class="float-left m-r-15">
+                        <small>Chats</small>
+                        <h6 class="mb-0 mt-1"><i class="icon-bubbles"></i> 13</h6>
+                    </div>
+                    <span class="bh_chats float-right">1,8,5,6,2,4,3,2</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.TaskName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Task Name" } })
+                                    @Html.ValidationMessageFor(model => model.TaskName, "", new { @class = "text-danger" })
+                                    @*<input type="text" class="form-control" placeholder="Project Name *">*@
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    @*<input type="text" data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Start date *">*@
+                                    @Html.EditorFor(model => model.Start_Date, new { htmlAttributes = new { @class = "form-control datepicker", @placeholder = "Start Date *" } })
+                                    @Html.ValidationMessageFor(model => model.Start_Date, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.End_Date, new { htmlAttributes = new { @class = "form-control datepicker", @placeholder = "Start Date *" } })
+                                    @Html.ValidationMessageFor(model => model.End_Date, "", new { @class = "text-danger" })
+                                    @*<input type="text" data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="End date *">*@
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control", @placeholder = "Duration" } })
+                                    @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+                                    @*<select class="form-control show-tick">
+                                            <option>Select Priority</option>
+                                            <option>High</option>
+                                            <option>Medium</option>
+                                            <option>Low</option>
+                                        </select>*@
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-12">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.Estimation, new { htmlAttributes = new { @class = "form-control", @placeholder = "Estimation" } })
+                                    @Html.ValidationMessageFor(model => model.Estimation, "", new { @class = "text-danger" })
+                                    @*<select class="form-control show-tick">
+                                            <option>Select Priority</option>
+                                            <option>High</option>
+                                            <option>Medium</option>
+                                            <option>Low</option>
+                                        </select>*@
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="row clearfix">
+                                @*<div class="col-md-3 col-sm-12">
+                                    <label>Select Rate in Doller</label>
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" placeholder="Rate *">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <label>Type</label>
+                                    <div class="form-group">
+                                        <select class="form-control show-tick">
+                                            <option>Select Type</option>
+                                            <option>Hourly</option>
+                                            <option>Fixed</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <label>Select Team Lead</label>
+                                    <div class="form-group">
+                                        <select class="form-control show-tick">
+                                            <option>Select</option>
+                                            <option>Marshall Nichols</option>
+                                            <option>Susie Willis</option>
+                                            <option>Hossein Shams</option>
+                                            <option>Fidel Tonn</option>
+                                            <option>Frank Camly</option>
+                                            <option>Debra Stewart</option>
+                                            <option>Tim Hank</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <label>Selet Team</label>
+                                    <div class="form-group">
+                                        <select id="multiselect3-all" class="multiselect multiselect-custom" multiple="multiple">
+                                            <option value="multiselect-all">Select All</option>
+                                            <option value="cheese">Cheese</option>
+                                            <option value="tomatoes">Tomatoes</option>
+                                            <option value="mozarella">Mozzarella</option>
+                                            <option value="mushrooms">Mushrooms</option>
+                                            <option value="pepperoni">Pepperoni</option>
+                                            <option value="onions">Onions</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>*@
+
+                        <div class="row clearfix">
+                            @*<div class="col-12">
+                                    <input type="file" class="dropify">
+                                    <div class="mt-3"></div>
+                                </div>*@
+                            <div class="col-sm-12">
+                                <div class="summernote">
+                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="mt-4">
+                                    <button type="submit" class="btn btn-primary">Create</button>
+                                    <button type="submit" class="btn btn-outline-secondary">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

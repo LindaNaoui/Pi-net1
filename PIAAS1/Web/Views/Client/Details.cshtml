@@ -1,0 +1,122 @@
+﻿@model Web.Models.ClientViewModel
+@using Domain.Entities;
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+
+    IEnumerable<Project> projects = ViewData["Projects"] as IEnumerable<Project>;
+
+}
+<div class="container-fluid">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-6 col-md-8 col-sm-12">
+                <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a>Add new client</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>
+                    <li class="breadcrumb-item">Clients</li>
+                    <li class="breadcrumb-item active"> Client details</li>
+                </ul>
+            </div>
+            <div class="col-lg-6 col-md-4 col-sm-12 text-right">
+                <div class="bh_chart hidden-xs">
+                    <div class="float-left m-r-15">
+                        <small>Visitors</small>
+                        <h6 class="mb-0 mt-1"><i class="icon-user"></i> 1,784</h6>
+                    </div>
+                    <span class="bh_visitors float-right">2,5,1,8,3,6,7,5</span>
+                </div>
+                <div class="bh_chart hidden-sm">
+                    <div class="float-left m-r-15">
+                        <small>Visits</small>
+                        <h6 class="mb-0 mt-1"><i class="icon-globe"></i> 325</h6>
+                    </div>
+                    <span class="bh_visits float-right">10,8,9,3,5,8,5</span>
+                </div>
+                <div class="bh_chart hidden-sm">
+                    <div class="float-left m-r-15">
+                        <small>Chats</small>
+                        <h6 class="mb-0 mt-1"><i class="icon-bubbles"></i> 13</h6>
+                    </div>
+                    <span class="bh_chats float-right">1,8,5,6,2,4,3,2</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12">
+                <div class="card client-detail">
+                    <div class="body">
+                        <div class="profile-image">
+                            <img src="../assets/images/user.png" alt="">
+                        </div>
+                        <div class="details">
+                            <h4 class="m-t-0 m-b-0"><strong> @Html.DisplayFor(model => model.Prenom)</strong>  @Html.DisplayFor(model => model.Nom)</h4>
+                            <span class="job_post"> @Html.DisplayFor(model => model.Email)</span>
+                            <p>795 Folsom Ave, Suite 600 San Francisco, CADGE 94107</p>
+                            <p class="social-icon">
+                                <a title="Twitter" href="javascript:void(0);"><i class="fa fa-twitter"></i></a>
+                                <a title="Facebook" href="javascript:void(0);"><i class="fa fa-facebook"></i></a>
+                                <a title="Google-plus" href="javascript:void(0);"><i class="fa fa-twitter"></i></a>
+                                <a title="Behance" href="javascript:void(0);"><i class="fa fa-behance"></i></a>
+                                <a title="Instagram" href="javascript:void(0);"><i class="fa fa-instagram "></i></a>
+                            </p>
+                            <div class="m-t-15">
+                                <button class="btn btn-primary">Follow</button>
+                                <button class="btn btn-success">Message</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="header">
+                        <h2>Project Tasks</h2>
+                        <ul class="header-dropdown">
+                            <li><a href="#"><i class="icon-plus"></i></a></li>
+                        </ul>
+                    </div>
+
+                        <div class="body">
+                            <div class="body project_report">
+                                <div class="table-responsive">
+                                    <table class="table table-hover js-basic-example dataTable table-custom m-b-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Project Name</th>
+                                                <th>Deadline</th>
+                                                <th>Status</th>
+                                                <th>View Project</th>
+                                                <th>Affect Project</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var project in projects)
+                                            {
+                                            <tr>
+                                                <td class="project-title">
+                                                    <h6>@project.ProjectName </h6>
+                                                    <small>Created : @project.Start_Date.ToString("dd MMM, yyyy")</small>
+                                                </td>
+                                                <td>@project.End_Date.ToString("dd MMM, yyyy")</td>
+                                                <td><span class="badge-purple badge">Not affected</span></td>
+                                                <td class="project-actions" align="center">
+                                                    <a href="project-detail.html" class="btn btn-sm btn-outline-primary"><i class="icon-eye"></i></a>
+                                                </td>
+                                                <td class="project-action" align="center">
+                                                    <a href="@Url.Action("AffectProjectToClient","Client",new {idClient = Model.ClientID, idProject = project.ProjectId })" class="btn btn-sm btn-outline-success"><i class="icon-check"></i></a>
+                                                </td>
+                                            </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+

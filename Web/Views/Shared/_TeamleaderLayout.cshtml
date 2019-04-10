@@ -1,0 +1,319 @@
+﻿@using Microsoft.AspNet.Identity
+@using System.Security.Claims
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="description" content="Lucid Bootstrap 4.1.1 Admin Template">
+    <meta name="author" content="WrapTheme, design by: ThemeMakker.com">
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- VENDOR CSS -->
+    @Styles.Render("~/Content/assets/vendor/bootstrap/css/bootstrap.min.css")
+    @Styles.Render("~/Content/assets/vendor/font-awesome/css/font-awesome.min.css")
+    @Styles.Render("~/Content/assets/vendor/chartist/css/chartist.min.css")
+    @Styles.Render("~/Content/assets/vendor/chartist-plugin-tooltip/chartist-plugin-tooltip.css")
+    @Styles.Render("~/Content/assets/vendor/toastr/toastr.min.css")
+    @Styles.Render("~/Content/assets/vendor/jquery-datatable/dataTables.bootstrap4.min.css")
+    @Styles.Render("https://use.fontawesome.com/releases/v5.8.1/css/all.css")
+
+    <link rel="stylesheet" href="../assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+    @Styles.Render("~/Content/assets/vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css")
+    @Styles.Render("~/Content/assets/vendor/dropify/css/dropify.min.css")
+    @Styles.Render("~/Content/assets/vendor/sweetalert/sweetalert.css")
+
+    <!-- MAIN CSS -->
+    @Styles.Render("~/Content/light/assets/css/main.css")
+    @Styles.Render("~/Content/light/assets/css/color_skins.css")
+</head>
+
+
+<body class="theme-orange">
+    <!-- Page Loader -->
+    <div class="page-loader-wrapper">
+        <div class="loader">
+            <div class="m-t-30"><img src="http://www.wrraptheme.com/templates/lucid/hr/html/assets/images/logo-icon.svg" width="48" height="48" alt="Lucid"></div>
+            <p>Please wait...</p>
+        </div>
+    </div>
+
+    <div id="wrapper">
+        <!-- bar eli lfou9 -->
+        <nav class="navbar navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-btn">
+                    <button type="button" class="btn-toggle-offcanvas"><i class="lnr lnr-menu fa fa-bars"></i></button>
+                </div>
+
+                <div class="navbar-brand">
+                    <a href="index.html"><img src="http://www.wrraptheme.com/templates/lucid/hr/html/assets/images/logo.svg" alt="Lucid Logo" class="img-responsive logo"></a>
+                </div>
+
+                <div class="navbar-right">
+                    <form id="navbar-search" class="navbar-form search-form">
+                        <input value="" class="form-control" placeholder="Search here..." type="text">
+                        <button type="button" class="btn btn-default"><i class="icon-magnifier"></i></button>
+                    </form>
+
+                    <div id="navbar-menu">
+                        <ul class="nav navbar-nav">
+                            <li><a href="app-events.html" class="icon-menu d-none d-sm-block d-md-none d-lg-block"><i class="icon-calendar"></i></a></li>
+                            <li><a href="app-chat.html" class="icon-menu d-none d-sm-block"><i class="icon-bubbles"></i></a></li>
+                            <li><a href="app-inbox.html" class="icon-menu d-none d-sm-block"><i class="icon-envelope"></i><span class="notification-dot"></span></a></li>
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle icon-menu" data-toggle="dropdown">
+                                    <i class="icon-bell"></i>
+                                    <span class="notification-dot"></span>
+                                </a>
+                                <ul class="dropdown-menu notifications animated shake">
+                                    <li class="header"><strong>You have 4 new Notifications</strong></li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <i class="icon-info text-warning"></i>
+                                                </div>
+                                                <div class="media-body">
+                                                    <p class="text">Campaign <strong>Holiday Sale</strong> is nearly reach budget limit.</p>
+                                                    <span class="timestamp">10:00 AM Today</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <i class="icon-like text-success"></i>
+                                                </div>
+                                                <div class="media-body">
+                                                    <p class="text">Your New Campaign <strong>Holiday Sale</strong> is approved.</p>
+                                                    <span class="timestamp">11:30 AM Today</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <i class="icon-pie-chart text-info"></i>
+                                                </div>
+                                                <div class="media-body">
+                                                    <p class="text">Website visits from Twitter is 27% higher than last week.</p>
+                                                    <span class="timestamp">04:00 PM Today</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <i class="icon-info text-danger"></i>
+                                                </div>
+                                                <div class="media-body">
+                                                    <p class="text">Error on website analytics configurations</p>
+                                                    <span class="timestamp">Yesterday</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="footer"><a href="javascript:void(0);" class="more">See all notifications</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle icon-menu" data-toggle="dropdown"><i class="icon-equalizer"></i></a>
+                                <ul class="dropdown-menu user-menu menu-icon animated bounceIn">
+                                    <li class="menu-heading">ACCOUNT SETTINGS</li>
+                                    <li><a href="javascript:void(0);"><i class="icon-note"></i> <span>Basic</span></a></li>
+                                    <li><a href="javascript:void(0);"><i class="icon-equalizer"></i> <span>Preferences</span></a></li>
+                                    <li><a href="javascript:void(0);"><i class="icon-lock"></i> <span>Privacy</span></a></li>
+                                    <li><a href="javascript:void(0);"><i class="icon-bell"></i> <span>Notifications</span></a></li>
+                                    <li class="menu-heading">BILLING</li>
+                                    <li><a href="javascript:void(0);"><i class="icon-credit-card"></i> <span>Payments</span></a></li>
+                                    <li><a href="javascript:void(0);"><i class="icon-printer"></i> <span>Invoices</span></a></li>
+                                    <li><a href="javascript:void(0);"><i class="icon-refresh"></i> <span>Renewals</span></a></li>
+                                </ul>
+                            </li>
+                            <li><a href="@Url.Action("LogOff","Account", new {id = "logoutForm" } )" class="icon-menu"><i class="icon-login"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- end bar eli el fou9 -->
+        <!-- begin bar eli 3ala jnab -->
+        <div id="left-sidebar" class="sidebar">
+            <div class="sidebar-scroll">
+                <div class="user-account">
+                    <img src="../assets/images/user.png" class="rounded-circle user-photo" alt="User Profile Picture">
+                    <div class="dropdown">
+                        <span>Welcome,</span>
+                        <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>@User.Identity.GetUserName()</strong></a>
+                        <ul class="dropdown-menu dropdown-menu-right account animated flipInY">
+                            <li><a href="@Url.Action("My Profile", "Profil", new { id = User.Identity.GetUserId() })"><i class="icon-user"></i>My Profile</a></li>
+                            <li><a href="app-inbox.html"><i class="icon-envelope-open"></i>Messages</a></li>
+                            <li><a href="javascript:void(0);"><i class="icon-settings"></i>Settings</a></li>
+                            <li class="divider"></li>
+                            <li>
+                                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <a href="javascript:document.getElementById('logoutForm').submit()"><i class="icon-power"></i>Logout</a>
+                                }
+                            </li>
+                        </ul>
+                    </div>
+
+
+                </div>
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs">
+                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#hr_menu">Project</a></li>
+
+
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#setting"><i class="icon-settings"></i> Settings</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content p-l-0 p-r-0">
+                    <div class="tab-pane animated fadeIn active" id="hr_menu">
+                        <nav class="sidebar-nav">
+                            <ul class="main-menu metismenu">
+                                <li><a href="index2.html"><i class="icon-speedometer"></i><span>Dashboard</span></a></li>
+                                <li><a href="app-inbox.html"><i class="icon-envelope"></i>Inbox App</a></li>
+                                <li><a href="app-chat.html"><i class="icon-bubbles"></i>Chat App</a></li>
+                                <li>
+                                    <a href="#Projects" class="has-arrow"><i class="icon-list"></i><span>Projects</span></a>
+                                    <ul>
+                                        <li><a href="@Url.Action("Create","Project", new { id = User.Identity.GetUserId()})">Add Projects</a></li>
+                                        <li><a href="@Url.Action("Index","Project", new { id = User.Identity.GetUserId()})">Projects List</a></li>
+                                        
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#FileManager" class="has-arrow"><i class="icon-folder"></i> <span>File </span></a>
+                                    <ul>
+                                        <li><a href="file-dashboard.html">Dashboard</a></li>
+                                        <li><a href="file-documents.html">Documents</a></li>
+                                        <li><a href="file-media.html">Media</a></li>
+                                        <li><a href="file-images.html">Images</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="app-taskboard.html"><i class="icon-tag"></i>Taskboard</a></li>
+                                <li><a href="app-tickets.html"><i class="icon-screen-tablet"></i>Tickets</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+
+                    <div class="tab-pane animated fadeIn" id="setting">
+                        <div class="p-l-15 p-r-15">
+                            <h6>Choose Skin</h6>
+                            <ul class="choose-skin list-unstyled">
+                                <li data-theme="purple">
+                                    <div class="purple"></div>
+                                    <span>Purple</span>
+                                </li>
+                                <li data-theme="blue">
+                                    <div class="blue"></div>
+                                    <span>Blue</span>
+                                </li>
+                                <li data-theme="cyan">
+                                    <div class="cyan"></div>
+                                    <span>Cyan</span>
+                                </li>
+                                <li data-theme="green">
+                                    <div class="green"></div>
+                                    <span>Green</span>
+                                </li>
+                                <li data-theme="orange" class="active">
+                                    <div class="orange"></div>
+                                    <span>Orange</span>
+                                </li>
+                                <li data-theme="blush">
+                                    <div class="blush"></div>
+                                    <span>Blush</span>
+                                </li>
+                            </ul>
+                            <hr>
+                            <h6>General Settings</h6>
+                            <ul class="setting-list list-unstyled">
+                                <li>
+                                    <label class="fancy-checkbox">
+                                        <input type="checkbox" name="checkbox">
+                                        <span>Report Panel Usag</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="fancy-checkbox">
+                                        <input type="checkbox" name="checkbox">
+                                        <span>Email Redirect</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="fancy-checkbox">
+                                        <input type="checkbox" name="checkbox" checked>
+                                        <span>Notifications</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="fancy-checkbox">
+                                        <input type="checkbox" name="checkbox" checked>
+                                        <span>Auto Updates</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="fancy-checkbox">
+                                        <input type="checkbox" name="checkbox">
+                                        <span>Offline</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="fancy-checkbox">
+                                        <input type="checkbox" name="checkbox" checked>
+                                        <span>Location Permission</span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="main-content">
+            @RenderBody()
+        </div>
+    </div>
+
+
+    @Scripts.Render("~/Content/light/assets/bundles/libscripts.bundle.js")
+    @Scripts.Render("~/Content/light/assets/bundles/vendorscripts.bundle.js")
+    @Scripts.Render("~/Content/assets/vendor/toastr/toastr.js")
+    @Scripts.Render("~/Content/light/assets/bundles/chartist.bundle.js")
+    @Scripts.Render("~/Content/light/assets/bundles/knob.bundle.js")
+    <!-- Jquery Knob-->
+
+    @Scripts.Render("~/Content/light/assets/bundles/mainscripts.bundle.js")
+    @Scripts.Render("~/Content/light/assets/js/index.js")
+
+    @Scripts.Render("~/Content/light/assets/bundles/datatablescripts.bundle.js")
+    @Scripts.Render("~/Content/light/assets/js/pages/tables/jquery-datatable.js")
+
+    @Scripts.Render("~/Content/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js")
+
+    @Scripts.Render("~/Content/assets/vendor/dropify/js/dropify.min.css")
+    @Scripts.Render("~/Content/light/assets/js/pages/forms/dropify.js")
+    @Scripts.Render("~/Content/assets/vendor/sweetalert/sweetalert.min.js")
+
+</body>
+</html>
