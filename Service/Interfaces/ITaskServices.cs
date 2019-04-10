@@ -9,6 +9,6 @@ namespace Service.Interfaces
 {
     public interface ITaskServices : IService<Tasks>
     {
-
+//task
     }
 }

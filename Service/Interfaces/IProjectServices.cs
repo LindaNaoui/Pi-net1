@@ -9,6 +9,6 @@ using System.Threading.Tasks;
 namespace Service.Interfaces
 {
     public interface IProjectServices : IService<Project>
-    {
+    {//pk pas
     }
 }
