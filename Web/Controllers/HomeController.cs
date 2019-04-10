@@ -12,7 +12,7 @@ using Web.Models;
 namespace Web.Controllers
 {
     public class HomeController : Controller
-    {
+    {//ok
         UserService us = new UserService();
         public ActionResult Index()
         {
