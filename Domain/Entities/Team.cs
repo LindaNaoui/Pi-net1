@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Domain.Entities
 {
     public class Team
-    {
+    {//teamsguys
         public int TeamId { get; set; }
         public string TeamName { get; set; }
 
