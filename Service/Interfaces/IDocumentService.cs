@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Service.Interfaces
 {
     public interface IDocumentService : IService<Document>
-    {
+    {//okguys
 
     }
 }
