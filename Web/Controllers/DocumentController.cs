@@ -16,7 +16,7 @@ namespace Web.Controllers
 {
     public class DocumentController : Controller
     {
-
+        //document
         IDocumentService DS = new DocumentServices();
         // GET: Document
         public ActionResult Index()
