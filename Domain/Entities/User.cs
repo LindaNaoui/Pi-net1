@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace Domain.Entities
 {
 
     public class User : IdentityUser<int, CustomUserLogin, CustomUserRole, CustomUserClaim>
-    {
+    {//okguys
 
 
         public string firstname { get; set; }
