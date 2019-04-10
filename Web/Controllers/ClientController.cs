@@ -13,7 +13,7 @@ namespace Web.Controllers
 {
     public class ClientController : Controller
     {
-
+//client
        ClientServices As = new ClientServices();
 
         // GET: Client
