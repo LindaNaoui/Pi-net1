@@ -1,0 +1,121 @@
+﻿@model Web.Models.ProjectViewModel
+
+
+@{
+
+
+    Layout = "~/Views/Shared/_TeamleaderLayout.cshtml";
+}
+
+
+
+<div class="container-fluid">
+    <div class="block-header">
+        <div class="row">
+            <div class="col-lg-6 col-md-8 col-sm-12">
+                <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Create New Project</h2>
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>
+                    <li class="breadcrumb-item">Projects</li>
+                    <li class="breadcrumb-item active">Add Project</li>
+                </ul>
+            </div>
+            <div class="col-lg-6 col-md-4 col-sm-12 text-right">
+                <div class="bh_chart hidden-xs">
+                    <div class="float-left m-r-15">
+                        <small>Visitors</small>
+                        <h6 class="mb-0 mt-1"><i class="icon-user"></i> 1,784</h6>
+                    </div>
+                    <span class="bh_visitors float-right">2,5,1,8,3,6,7,5</span>
+                </div>
+                <div class="bh_chart hidden-sm">
+                    <div class="float-left m-r-15">
+                        <small>Visits</small>
+                        <h6 class="mb-0 mt-1"><i class="icon-globe"></i> 325</h6>
+                    </div>
+                    <span class="bh_visits float-right">10,8,9,3,5,8,5</span>
+                </div>
+                <div class="bh_chart hidden-sm">
+                    <div class="float-left m-r-15">
+                        <small>Chats</small>
+                        <h6 class="mb-0 mt-1"><i class="icon-bubbles"></i> 13</h6>
+                    </div>
+                    <span class="bh_chats float-right">1,8,5,6,2,4,3,2</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+                <div class="body">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row clearfix">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.ProjectName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Project Name" } })
+                                    @Html.ValidationMessageFor(model => model.ProjectName, "", new { @class = "text-danger" })
+                                    @*<input type="text" class="form-control" placeholder="Project Name *">*@
+                                </div>
+                            </div>
+                            @*<div class="col-md-3 col-sm-12">
+                                    <div class="form-group">
+                                        <select class="form-control show-tick">
+                                            <option>Select Client Name</option>
+                                            <option>Core Technolab Pvt.</option>
+                                            <option>vPro Infoweb LLC.</option>
+                                            <option>M2 Solution Pvt. Ltd.</option>
+                                        </select>
+                                    </div>
+                                </div>*@
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <div class="input-daterange input-group" data-provide="datepicker">
+                                        @Html.EditorFor(model => model.Start_Date, new { htmlAttributes = new { @class = "form-control", @placeholder = "Start Date *", @name = "start" } })
+                                        @Html.ValidationMessageFor(model => model.Start_Date, "", new { @class = "text-danger" })
+                                        <span class="input-group-addon"> &nbsp; to &nbsp; </span>
+                                        @Html.EditorFor(model => model.End_Date, new { htmlAttributes = new { @class = "form-control", @placeholder = "End Date *", @name = "end" } })
+                                        @Html.ValidationMessageFor(model => model.End_Date, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row clearfix">
+                            @*<div class="col-12">
+                                    <input type="file" class="dropify">
+                                    <div class="mt-3"></div>
+                                </div>*@
+                            <div class="col-sm-12">
+                                <div class="summernote">
+                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    @Html.DropDownListFor(model => model.etat, (SelectList)ViewData["etat"], "---- SVP selectionnez----", new { htmlAttributes = new { @class = "form-control show-tick" } })
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="mt-4">
+                                    <button type="submit" class="btn btn-primary">Create</button>
+                                    <button type="reset" class="btn btn-outline-secondary" onclick="location.href='@Url.Action("Index","Project")'">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

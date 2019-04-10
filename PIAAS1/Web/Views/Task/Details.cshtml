@@ -1,0 +1,214 @@
+﻿@model Web.Models.TaskViewModel
+@using Domain.Entities;
+@using Service.Services;
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+    IEnumerable<User> TeamMembers = ViewData["TeamMembers"] as IEnumerable<User>;
+    var T = (Team)ViewData["Team"];
+    UserService us = new UserService();
+    TaskServices TS = new TaskServices();
+    var U = (User)ViewData["TeamLead"];
+
+}
+<div class="file_manager">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-lg-6 col-md-8 col-sm-12">
+                    <h2><a href="@Url.Action("Details","Project", new { id=Model.ProjectFK})" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Task Details</h2>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>
+                        <li class="breadcrumb-item">Project</li>
+                        <li class="breadcrumb-item active">Project Details</li>
+                        <li class="breadcrumb-item active">Task Details</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-4 col-sm-12 text-right">
+                    <div class="bh_chart hidden-xs">
+                        <div class="float-left m-r-15">
+                            <small>Visitors</small>
+                            <h6 class="mb-0 mt-1"><i class="icon-user"></i> 1,784</h6>
+                        </div>
+                        <span class="bh_visitors float-right">2,5,1,8,3,6,7,5</span>
+                    </div>
+                    <div class="bh_chart hidden-sm">
+                        <div class="float-left m-r-15">
+                            <small>Visits</small>
+                            <h6 class="mb-0 mt-1"><i class="icon-globe"></i> 325</h6>
+                        </div>
+                        <span class="bh_visits float-right">10,8,9,3,5,8,5</span>
+                    </div>
+                    <div class="bh_chart hidden-sm">
+                        <div class="float-left m-r-15">
+                            <small>Chats</small>
+                            <h6 class="mb-0 mt-1"><i class="icon-bubbles"></i> 13</h6>
+                        </div>
+                        <span class="bh_chats float-right">1,8,5,6,2,4,3,2</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-lg-4 col-md-12">
+                <div class="card">
+                    <div class="body">
+                        <h5>  @Html.DisplayFor(model => model.TaskName)</h5>
+                        <p>  @Html.DisplayFor(model => model.Description)</p>
+                        <div class="progress-container progress-info m-b-25">
+                            <span class="progress-badge">Task Status</span>
+                            <div class="progress">
+                                @{
+                                    var complete = 0.0;
+                                    if (DateTime.Now < Model.Start_Date)
+                                    {
+                                        complete = 0;
+                                    }
+                                    else
+                                    {
+                                        complete = ((DateTime.Now - Model.Start_Date).TotalDays / int.Parse(Model.Duration)) * 100;
+                                    }
+                                }
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: @complete%;">
+                                    <span class="progress-value" style="color : #000000">@String.Format("{0:0.0}", complete) %</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="body">
+                        <ul class=" list-unstyled basic-list">
+                            <li>Created:<span class="badge-purple badge">  @Html.DisplayFor(model => model.Start_Date)</span></li>
+                            <li>Deadline:<span class="badge-danger badge">  @Html.DisplayFor(model => model.End_Date)</span></li>
+                            <li>Duration:<span class="badge-warning badge"> @Html.DisplayFor(model => model.Duration) Days</span></li>
+                            <li>
+                                Status@{
+                                    if (Model.Status.ToString() == "Not")
+                                    {
+                                        <span class="badge-purple badge">Not Affected</span>
+                                    }
+                                    else if (Model.Status.ToString() == "Todo")
+                                    {
+                                        <span class="badge-danger badge">To do</span>
+                                    }
+                                    else if (Model.Status.ToString() == "Doing")
+                                    {
+                                        <span class="badge-warning badge">Doing</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge-success badge">Done</span>
+                                    }
+                                }
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="header">
+                        <h2>
+                            Assigned Team
+                            <small>@T.TeamName</small>
+                        </h2>
+                    </div>
+                    @{ User xxx = us.GetById(T.TeamLeaderFK);}
+
+                    <div class="body">
+                        <div class="w_user">
+                            <img class="rounded-circle" src="@Url.Content(xxx.img)" style="margin-right:20px " alt="">
+                            <div class="wid-u-info">
+                                <h5>@xxx.firstname @xxx.lastname</h5>
+                                <span>@xxx.Email</span>
+                                <p class="text-muted m-b-0">@xxx.role</p>
+                            </div>
+                            <hr>
+                        </div>
+                        <ul class="right_chat list-unstyled mb-0">
+
+                            <ul class="right_chat list-unstyled mb-0">
+                                @foreach (var tm in TeamMembers)
+                                {
+                                    <li class="online">
+                                        <a href="javascript:void(0);">
+                                            <div class="media">
+                                                <img class="media-object " src="@Url.Content(tm.img)" alt="">
+                                                <div class="media-body">
+                                                    <span class="name">@tm.firstname @tm.lastname</span>
+                                                    <span class="message">@tm.Email</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Project Tasks</h2>
+                        <ul class="header-dropdown">
+                            <li><a href="#"><i class="icon-plus"></i></a></li>
+                        </ul>
+                    </div>
+                    @if (Model.Status.ToString() == "Not")
+                    {
+                        <div class="body">
+                            <div class="body project_report">
+                                <div class="table-responsive">
+                                    <table class="table table-hover js-basic-example dataTable table-custom m-b-0">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Team Member</th>
+                                                <th>Tasks Affected</th>
+                                                <th>Status</th>
+                                                <th>View Profile</th>
+                                                <th>Affect Task</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var member in TeamMembers)
+                                            {
+                                                if(U.role =="Team Leader")
+                                                {
+                                                <tr>
+                                                    <td>
+                                                        <img src="@Url.Content(member.img)" data-toggle="tooltip" data-placement="top" title="Team Lead" alt="Avatar" class="width45 rounded">
+                                                    </td>
+                                                    <td class="project-title">
+                                                        <h6>@member.firstname  @member.lastname</h6>
+                                                        <small>@member.Email</small>
+                                                    </td>
+
+                                                    <td>
+                                                        @{ var remaining = TS.GetAll().Where(e => e.TeamMemberFK == member.Id).Count(); }
+                                                        @remaining
+                                                    </td>
+
+                                                    <td><span class="badge badge-success">Active</span></td>
+                                                    <td class="project-actions" align="center">
+                                                        <a href="@Url.Action("Profil","Home", new { id = member.Id})" class="btn btn-sm btn-outline-primary"><i class="icon-eye"></i></a>
+                                                    </td>
+                                                    <td class="project-actions" align="center">
+                                                        <a href="@Url.Action("AffectTask","Task", new { idTeamMember=member.Id , idTask=Model.TasksId})" class="btn btn-sm btn-outline-success"><i class="icon-check"></i></a>
+                                                    </td>
+                                                </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

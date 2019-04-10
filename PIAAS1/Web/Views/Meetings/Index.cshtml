@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Domain.Entities.Meeting>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<br>
+<h2>All Meetings</h2>
+<br>
+<p class="btn btn-sm btn-outline-primary"><i class="icon-note"></i>@Html.ActionLink(" Create New ", "Create")</p>
+
+@using (Html.BeginForm())
+{<table>
+        <tr>
+            <td>
+                <div>
+                    Search for Meeting : @Html.TextBox("search")
+                </div>
+            </td>
+            <td> <input type="submit" value="Search" id="submit" class="btn btn-default" /></td>
+        </tr>
+    </table>}
+
+<br>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdMeet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.text)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.start_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.end_date)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdMeet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.start_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.end_date)
+            </td>
+            <td>
+                <a data-toggle="tooltip" title="Details" href="@Url.Action("Details","Meetings", new { id = item.IdMeet})" class="btn btn-sm btn-outline-primary"><i class="icon-eye"></i></a>
+                <a data-toggle="tooltip" title="Edit" href="@Url.Action("Edit","Meetings", new { id = item.IdMeet})" class="btn btn-sm btn-outline-success"><i class="icon-pencil"></i></a>
+                <a data-toggle="tooltip" title="Delete" href="@Url.Action("Delete","Meetings", new { id = item.IdMeet})" class="btn btn-sm btn-outline-danger js-sweetalert"  data-type="confirm"><i class="icon-trash"></i></a>
+            </td>
+        </tr>
+    }
+
+</table>

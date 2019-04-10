@@ -1,0 +1,133 @@
+﻿@model Web.Models.EmailModel
+
+@{
+
+    ViewBag.Title = "SendEmail";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+
+}
+
+<html>
+<head>
+    <script src="~/scripts/tinymce/tinymce.min.js"></script>
+
+    <script type="text/javascript">
+        // Initialize your tinyMCE Editor with your preferred options
+        tinyMCE.init({
+            // General options
+            mode: "textareas",
+            theme: "modern",
+            // Theme options
+            theme_advanced_buttons1: "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
+            theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+            theme_advanced_buttons3: "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+            theme_advanced_buttons4: "insertlayer,moveforward,movebackward,absolute,|,styleprops,spellchecker,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,blockquote,pagebreak,|,insertfile,insertimage",
+            theme_advanced_toolbar_location: "top",
+            theme_advanced_toolbar_align: "left",
+            theme_advanced_statusbar_location: "bottom",
+            theme_advanced_resizing: true,
+
+            // Example content CSS (should be your site CSS)
+            content_css: "css/example.css",
+        });
+    </script>
+</head>
+
+      </div>
+
+<body>
+    <!-- This will automatically post to your Index method (that is decorated with a HttpPost attribute) -->
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div id="main-content">
+            <div class="container-fluid">
+                <div class="block-header">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-8 col-sm-12">
+                            <h2><a href="javascript:void(0);" class="btn btn-xs btn-link btn-toggle-fullwidth"><i class="fa fa-arrow-left"></i></a> Compose</h2>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html"><i class="icon-home"></i></a></li>
+                                <li class="breadcrumb-item">App</li>
+                                <li class="breadcrumb-item"><a href="app-inbox.html">Inbox</a></li>
+                                <li class="breadcrumb-item active">Compose</li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 col-md-4 col-sm-12 text-right">
+                            <div class="bh_chart hidden-xs">
+                                <div class="float-left m-r-15">
+                                    <small>Visitors</small>
+                                    <h6 class="mb-0 mt-1"><i class="icon-user"></i> 1,784</h6>
+                                </div>
+                                <span class="bh_visitors float-right">2,5,1,8,3,6,7,5</span>
+                            </div>
+                            <div class="bh_chart hidden-sm">
+                                <div class="float-left m-r-15">
+                                    <small>Visits</small>
+                                    <h6 class="mb-0 mt-1"><i class="icon-globe"></i> 325</h6>
+                                </div>
+                                <span class="bh_visits float-right">10,8,9,3,5,8,5</span>
+                            </div>
+                            <div class="bh_chart hidden-sm">
+                                <div class="float-left m-r-15">
+                                    <small>Chats</small>
+                                    <h6 class="mb-0 mt-1"><i class="icon-bubbles"></i> 13</h6>
+                                </div>
+                                <span class="bh_chats float-right">1,8,5,6,2,4,3,2</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="body">
+                                <form>
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.ToEmail, new { htmlAttributes = new { @class = "form-control", @placeholder = "To" } })
+                                        @Html.ValidationMessageFor(model => model.ToEmail, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.EmailSubject, new { htmlAttributes = new { @class = "form-control", @placeholder = "Subject" } })
+                                        @Html.ValidationMessageFor(model => model.EmailSubject, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.EmailCC, new { htmlAttributes = new { @class = "form-control", @placeholder = "CC" } })
+                                        @Html.ValidationMessageFor(model => model.EmailCC, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.EmailBCC, new { htmlAttributes = new { @class = "form-control", @placeholder = "CC" } })
+                                        @Html.ValidationMessageFor(model => model.EmailBCC, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.EMailBody, new { htmlAttributes = new { @class = "form-control", @placeholder = "Write here" } })
+                                        @Html.ValidationMessageFor(model => model.EMailBody, "", new { @class = "text-danger" })
+                                    </div>
+
+
+
+
+                                </form>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Send" class="btn btn-primary" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10 text-success">
+                                        @ViewBag.Status
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</body>
+</html>

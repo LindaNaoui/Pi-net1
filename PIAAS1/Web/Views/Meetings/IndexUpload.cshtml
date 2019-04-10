@@ -1,0 +1,52 @@
+﻿
+<br>
+<br>
+<h2>File Upload and Download for the meeting</h2>
+<br>
+@model List<string>
+
+@using (Html.BeginForm("IndexUpload", "Meetings", FormMethod.Post, new { enctype = "multipart/Form-data" }))
+{
+    {
+        Layout = "~/Views/Shared/_MainLayout.cshtml";
+    }
+
+
+
+    <label for="File">Upload File :&emsp;</label>
+
+    <input type="file" name="file" id="file" class="btn btn-default" />
+    <br><br>
+
+    <input type="submit" value="Upload File" class="btn btn-default" />
+    <br>
+    <br>
+
+    @ViewBag.Message
+    <br>
+    <br>
+
+
+    <h2> Files List : </h2>
+
+    <br>
+
+    <table>
+        <tr>
+            <th> File Name </th>
+            <th> Link </th>
+        </tr>
+        @for (var i = 0; i <= Model.Count - 1; i++)
+        {
+            <tr>
+                <td>@Model[i].ToString()&emsp;</td>
+
+                <td><a data-toggle="tooltip" title="Download Now" href="@Url.Action("Download","Meetings", new {  FileName = @Model[i].ToString()})" class="btn btn-sm btn-outline-primary"><i class="icon-arrow-down"></i></a></td>
+            </tr>
+        }
+
+    </table>
+
+}
+
+
