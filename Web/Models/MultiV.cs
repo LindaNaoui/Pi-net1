@@ -7,6 +7,7 @@ namespace Web.Models
 {
     public class MultiV
     {
+    	//definitely
         public IEnumerable<Domain.Entities.User> User {get;set; }
         public RegisterViewModel lvm { get; set; }
     }
