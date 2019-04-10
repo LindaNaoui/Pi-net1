@@ -8,6 +8,7 @@ namespace Domain.Entities
 {
     public class Team
     {//teamsguys
+        //nomprenom
         public int TeamId { get; set; }
         public string TeamName { get; set; }
 
