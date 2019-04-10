@@ -11,6 +11,7 @@ namespace Web.Models
     {
 
         [Key]
+        //required
         public int TeamId { get; set; }
         public string TeamName { get; set; }
 
