@@ -9,7 +9,7 @@ namespace Domain.Entities
 {
     public enum Etat { Pending, Active, Closed }
     public class Project
-    {
+    {//projet
         public int ProjectId { get; set; }
         [Required(ErrorMessage = "obligatoire")]
         public string ProjectName { get; set; }

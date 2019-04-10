@@ -8,7 +8,7 @@ namespace Domain.Entities
 {
    public class Phase
     {
-
+//phases
         public int PhaseId { get; set; }
         public string PhaseName { get; set; }
         public DateTime Start_Date { get; set; }
