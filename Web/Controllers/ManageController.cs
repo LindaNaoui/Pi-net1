@@ -12,7 +12,7 @@ namespace Web.Controllers
 {
     [Authorize]
     public class ManageController : Controller
-    {
+    {//manage
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
